@@ -8,7 +8,7 @@ import {printSchema} from "graphql";
 
 import schema from './data/schema';
 
-const PORT = 3000;
+const PORT = 3010;
 const app = express();
 
 initPassportAuthentication(app);

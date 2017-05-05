@@ -1,5 +1,5 @@
 import ApolloClient, {createBatchingNetworkInterface} from 'apollo-client';
-import {SubscriptionClient, addGraphQLSubscriptions} from 'subscriptions-transport-ws/dist/client';
+import {addGraphQLSubscriptions, SubscriptionClient} from "subscriptions-transport-ws/dist";
 
 // Polyfill fetch
 import 'whatwg-fetch';
@@ -19,7 +19,7 @@ const networkInterface = createBatchingNetworkInterface({
 });
 
 networkInterface.use([{
-    applyMiddleware(req, next) {
+    applyBatchMiddleware(req, next) {
         if (!req.options.headers) {
             req.options.headers = {};  // Create the header object if needed.
         }

@@ -1,5 +1,5 @@
 import {print} from 'graphql'
-import {SubscriptionClient} from 'subscriptions-transport-ws';
+import {SubscriptionClient} from "subscriptions-transport-ws/dist";
 
 // quick way to add the subscribe and unsubscribe functions to the network interface
 export function addGraphQLSubscriptions(networkInterface: any, wsClient: SubscriptionClient): any {
