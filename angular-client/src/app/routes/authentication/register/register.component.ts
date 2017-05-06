@@ -27,15 +27,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
 
     public submitForm(): void {
-        debugger;
-
         if (!this.registerFormObject.username || !this.registerFormObject.password) {
             this.errors = [{message: 'All Fields are required'}];
 
             return;
         }
 
-        debugger;
         this.apollo.mutate({
             mutation: registerMutation,
             variables: {
