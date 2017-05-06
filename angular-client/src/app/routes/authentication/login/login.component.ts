@@ -1,10 +1,12 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Apollo} from 'apollo-angular';
 
 import 'rxjs/add/operator/toPromise';
 
 import {loginMutation} from '../authentication.model';
+import {AppSessionService} from "../../../shared/services/app-session.service";
+
 interface iLoginFormObject {
     username: string,
     password: string
@@ -19,7 +21,9 @@ export class LoginComponent {
     private errors;
 
     constructor(private route: ActivatedRoute,
-                private apollo: Apollo) {
+                private router: Router,
+                private apollo: Apollo,
+                private appSessionService: AppSessionService) {
     }
 
     public ngOnInit(): void {
@@ -39,11 +43,13 @@ export class LoginComponent {
             },
         }).subscribe(({data}) => {
             if (data['login'].tokens) {
-                localStorage.token = data['login'].tokens[0];
+                this.appSessionService.init({user: data['login']});
             }
 
             this.registerFormObject = {username: '', password: ''};
             this.errors = [];
+
+            this.router.navigate(['/']);
         }, (error) => {
             this.errors = error.graphQLErrors;
         });

@@ -17,6 +17,7 @@ const schema: ITypeDefinitions = [`
     type Mutation {
       addUser(username: String!, password: String!): User
       login(username: String!, password: String!): User
+      logout(token: String!): Boolean
     }
    
 `];

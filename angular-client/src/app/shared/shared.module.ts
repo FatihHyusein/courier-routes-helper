@@ -13,8 +13,12 @@ import {
     MdCardModule,
     MdInputModule,
     MdGridListModule,
-    MdToolbarModule
+    MdToolbarModule, MdMenuModule, MdIconModule
 } from '@angular/material';
+const materialDesignModules = [MdButtonModule, MdCheckboxModule, MdCardModule, MdInputModule, MdGridListModule, MdToolbarModule, MdMenuModule, MdIconModule];
+
+
+import {AppSessionService} from "./services/app-session.service";
 
 
 @NgModule({
@@ -25,7 +29,7 @@ import {
         RouterModule,
         ApolloModule,
         InfiniteScrollModule,
-        MdButtonModule, MdCheckboxModule, MdCardModule, MdInputModule, MdGridListModule, MdToolbarModule
+        ...materialDesignModules
     ],
     declarations: [],
     exports: [BrowserModule,
@@ -34,7 +38,7 @@ import {
         RouterModule,
         ApolloModule,
         InfiniteScrollModule,
-        MdButtonModule, MdCheckboxModule, MdCardModule, MdInputModule, MdGridListModule, MdToolbarModule
+        ...materialDesignModules
     ],
     providers: [],
     schemas: []
@@ -43,7 +47,7 @@ export class SharedModule {
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: SharedModule,
-            providers: []
+            providers: [AppSessionService]
         };
     }
 }

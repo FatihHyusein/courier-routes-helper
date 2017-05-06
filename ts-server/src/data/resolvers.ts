@@ -22,5 +22,8 @@ export let resolvers: IResolvers = {
         login(obj, args: IUser, context) {
             return usersModel.login(args);
         },
+        logout(obj, {token}, context) {
+            return usersModel.logout(context.currentUser, token);
+        }
     },
 };

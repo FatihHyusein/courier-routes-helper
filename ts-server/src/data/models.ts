@@ -49,6 +49,20 @@ class Users {
         currentUser.tokens.push(currentUser.username + currentUser.password);
         return Promise.resolve(currentUser);
     }
+
+    logout(user: IUser, token: string): Promise<boolean> {
+        let currentUser = users.find((u: IUser) => {
+            return u.id === user.id
+        });
+
+        if (currentUser) {
+            currentUser.tokens = <[string]>currentUser.tokens.filter((a) => {
+                return a != 'a'
+            })
+        }
+
+        return Promise.resolve(true);
+    }
 }
 
 
