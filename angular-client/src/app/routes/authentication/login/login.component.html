@@ -1,25 +1,36 @@
 <div>
-    <div>
-        <h1>Login</h1>
+    <md-card>
+        <md-card-header>
+            <md-card-title>Login</md-card-title>
+        </md-card-header>
 
-        <form (ngSubmit)="submitForm()">
-            <div class="form-group">
-                <input type="text" class="form-control" id="username" name="username"
-                       [(ngModel)]="registerFormObject.username"
-                       placeholder="Username"/>
-            </div>
+        <md-card-content>
+            <form (ngSubmit)="submitForm()" id="login-form">
+                <md-grid-list [cols]="4">
+                    <md-grid-tile>
+                        <md-input-container class="example-full-width">
+                            <input type="text" mdInput placeholder="Username" name="username"
+                                   [(ngModel)]="registerFormObject.username">
+                        </md-input-container>
+                    </md-grid-tile>
+                    <md-grid-tile>
+                        <md-input-container class="example-full-width">
+                            <input type="password" mdInput placeholder="Password" name="password"
+                                   [(ngModel)]="registerFormObject.password">
+                        </md-input-container>
+                    </md-grid-tile>
 
-            <div class="form-group">
-                <input type="password" class="form-control" id="password" name="password"
-                       [(ngModel)]="registerFormObject.password"
-                       placeholder="Password"/>
-            </div>
+                    <md-grid-tile>
+                        <div *ngIf="errors" class="alert alert-danger" role="alert">
+                            {{errors[0].message}}
+                        </div>
+                    </md-grid-tile>
+                </md-grid-list>
+            </form>
+        </md-card-content>
 
-            <div *ngIf="errors" class="alert alert-danger" role="alert">
-                {{errors[0].message}}
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
-    </div>
-    <br/>
+        <md-card-actions>
+            <button md-raised-button class="md-ripple-background" type="submit" form="login-form">Login</button>
+        </md-card-actions>
+    </md-card>
 </div>

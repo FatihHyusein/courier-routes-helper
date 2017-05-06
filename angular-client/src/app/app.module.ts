@@ -10,12 +10,15 @@ import {provideClient} from './client';
 import {SharedModule} from "./shared/shared.module";
 import {AuthenticationModule} from "./routes/authentication/authentication.module";
 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 @NgModule({
     imports: [
         RouterModule.forRoot(routes),
         ApolloModule.forRoot(provideClient),
         SharedModule.forRoot(),
-        AuthenticationModule
+        AuthenticationModule,
+        BrowserAnimationsModule
     ],
     declarations: [
         AppComponent

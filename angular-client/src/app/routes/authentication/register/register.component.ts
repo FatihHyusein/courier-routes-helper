@@ -16,7 +16,7 @@ interface iRegisterFormObject {
     templateUrl: './register.component.html'
 })
 export class RegisterComponent implements OnInit, OnDestroy {
-    private registerFormObject: iRegisterFormObject = { username: '', password: '' };
+    private registerFormObject: iRegisterFormObject = {username: '', password: ''};
     private errors;
 
     constructor(private route: ActivatedRoute,
@@ -27,23 +27,24 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
 
     public submitForm(): void {
+        debugger;
+
         if (!this.registerFormObject.username || !this.registerFormObject.password) {
-            this.errors = [{ message: 'All Fields are required' }];
+            this.errors = [{message: 'All Fields are required'}];
 
             return;
         }
 
+        debugger;
         this.apollo.mutate({
             mutation: registerMutation,
             variables: {
                 username: this.registerFormObject.username,
                 password: this.registerFormObject.password,
             },
-        }).toPromise()
-            .then(() => {
-                this.registerFormObject = { username: '', password: '' };
-            })
-            .catch(errors => this.errors = errors);
+        }).subscribe(() => {
+            this.registerFormObject = {username: '', password: ''};
+        });
     }
 
     public ngOnDestroy(): void {

@@ -38,11 +38,9 @@ export class LoginComponent {
                 username: this.registerFormObject.username,
                 password: this.registerFormObject.password,
             },
-        }).toPromise()
-            .then(() => {
+        }).subscribe(() => {
                 this.registerFormObject = { username: '', password: '' };
-            })
-            .catch(errors => this.errors = errors);
+            });
     }
 
     public ngOnDestroy(): void {

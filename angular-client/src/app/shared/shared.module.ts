@@ -2,9 +2,19 @@ import {ModuleWithProviders, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
+
 import {ApolloModule} from 'apollo-angular';
-import {EmojifyModule} from 'angular2-emojify';
 import {InfiniteScrollModule} from 'angular2-infinite-scroll';
+
+
+import {
+    MdButtonModule,
+    MdCheckboxModule,
+    MdCardModule,
+    MdInputModule,
+    MdGridListModule,
+    MdToolbarModule
+} from '@angular/material';
 
 
 @NgModule({
@@ -14,8 +24,8 @@ import {InfiniteScrollModule} from 'angular2-infinite-scroll';
         ReactiveFormsModule,
         RouterModule,
         ApolloModule,
-        EmojifyModule,
-        InfiniteScrollModule
+        InfiniteScrollModule,
+        MdButtonModule, MdCheckboxModule, MdCardModule, MdInputModule, MdGridListModule, MdToolbarModule
     ],
     declarations: [],
     exports: [BrowserModule,
@@ -23,8 +33,9 @@ import {InfiniteScrollModule} from 'angular2-infinite-scroll';
         ReactiveFormsModule,
         RouterModule,
         ApolloModule,
-        EmojifyModule,
-        InfiniteScrollModule],
+        InfiniteScrollModule,
+        MdButtonModule, MdCheckboxModule, MdCardModule, MdInputModule, MdGridListModule, MdToolbarModule
+    ],
     providers: [],
     schemas: []
 })
