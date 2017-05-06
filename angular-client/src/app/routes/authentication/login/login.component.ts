@@ -4,7 +4,7 @@ import {Apollo} from 'apollo-angular';
 
 import 'rxjs/add/operator/toPromise';
 
-import {registerMutation} from '../authentication.model';
+import {loginMutation} from '../authentication.model';
 interface iLoginFormObject {
     username: string,
     password: string
@@ -15,7 +15,7 @@ interface iLoginFormObject {
     templateUrl: 'login.component.html'
 })
 export class LoginComponent {
-    private registerFormObject: iLoginFormObject = { username: '', password: '' };
+    private registerFormObject: iLoginFormObject = {username: '', password: ''};
     private errors;
 
     constructor(private route: ActivatedRoute,
@@ -27,20 +27,26 @@ export class LoginComponent {
 
     public submitForm(): void {
         if (!this.registerFormObject.username || !this.registerFormObject.password) {
-            this.errors = [{ message: 'All Fields are required' }];
-
+            this.errors = [{message: 'All Fields are required'}];
             return;
         }
 
         this.apollo.mutate({
-            mutation: registerMutation,
+            mutation: loginMutation,
             variables: {
                 username: this.registerFormObject.username,
                 password: this.registerFormObject.password,
             },
-        }).subscribe(() => {
-                this.registerFormObject = { username: '', password: '' };
-            });
+        }).subscribe(({data}) => {
+            if (data['login'].tokens) {
+                localStorage.token = data['login'].tokens[0];
+            }
+
+            this.registerFormObject = {username: '', password: ''};
+            this.errors = [];
+        }, (error) => {
+            this.errors = error.graphQLErrors;
+        });
     }
 
     public ngOnDestroy(): void {

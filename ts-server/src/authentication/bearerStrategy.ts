@@ -4,9 +4,9 @@ import {IUser} from "../../typings";
 
 const bearerStrategy = new Strategy((token: string, cb) => {
     usersModel.findByToken(token).then((user: IUser) => {
-        return cb(null, user);
+        return cb(null, user || {});
     }).catch((err) => {
-        return cb(err, null);
+        return cb(null, {});
     })
 });
 

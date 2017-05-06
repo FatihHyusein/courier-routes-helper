@@ -7,13 +7,20 @@ export let resolvers: IResolvers = {
         myProfile(obj, args: { id: number }, context: IContext) {
             return usersModel.findById(args.id);
         },
-        users() {
-            return usersModel.getList();
+        users(obj, args, context: IContext) {
+            if (context.currentUser && context.currentUser.id) {
+                return usersModel.getList();
+            }
+            return [];
         },
     },
     Mutation: {
         addUser(obj, args: IUser, context) {
             return usersModel.add(args);
+        },
+
+        login(obj, args: IUser, context) {
+            return usersModel.login(args);
         },
     },
 };

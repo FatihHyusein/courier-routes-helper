@@ -11,6 +11,7 @@ import {SharedModule} from "./shared/shared.module";
 import {AuthenticationModule} from "./routes/authentication/authentication.module";
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AdminModule} from "./routes/admin/admin.module";
 
 @NgModule({
     imports: [
@@ -18,6 +19,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
         ApolloModule.forRoot(provideClient),
         SharedModule.forRoot(),
         AuthenticationModule,
+        AdminModule,
         BrowserAnimationsModule
     ],
     declarations: [

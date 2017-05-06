@@ -6,6 +6,7 @@ const schema: ITypeDefinitions = [`
     type User {
       id: Int!
       username: String!
+      tokens: [String]
     }
     
     type Query {
@@ -15,6 +16,7 @@ const schema: ITypeDefinitions = [`
     
     type Mutation {
       addUser(username: String!, password: String!): User
+      login(username: String!, password: String!): User
     }
    
 `];

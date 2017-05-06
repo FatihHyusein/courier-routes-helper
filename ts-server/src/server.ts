@@ -15,12 +15,13 @@ initPassportAuthentication(app);
 
 app.use('*', cors());
 
-app.use('/graphql', bodyParser.json(), authenticate('bearer', { session: false }),
-
+app.use('/graphql', bodyParser.json(), authenticate('bearer', {session: false}),
     graphqlExpress((req) => {
         return {
             schema: schema,
-            context: {}
+            context: {
+                currentUser: req.user
+            }
         };
     }));
 
