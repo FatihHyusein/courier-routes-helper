@@ -9,9 +9,14 @@ const schema: ITypeDefinitions = [`
       tokens: [String]
     }
     
+     type Stop {
+      address: String
+    }
+    
     type Query {
       myProfile(id: Int!): User
       users: [User]
+      driverStops(driverId: String):[Stop]
     }
     
     type Mutation {

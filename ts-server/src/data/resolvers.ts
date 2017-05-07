@@ -1,6 +1,6 @@
 import {IResolverObject, IResolvers} from "graphql-tools/dist/Interfaces";
 import {IContext, IUser} from "../../typings";
-import {usersModel} from './models';
+import {stopsModel, usersModel} from './models';
 
 export let resolvers: IResolvers = {
     Query: {
@@ -13,16 +13,23 @@ export let resolvers: IResolvers = {
             }
             return [];
         },
+
+        driverStops(obj, {driverId}, context: IContext) {
+            if (context.currentUser && context.currentUser.id) {
+                return stopsModel.getDriverStops(context.currentUser, driverId);
+            }
+            return [];
+        },
     },
     Mutation: {
-        addUser(obj, args: IUser, context) {
+        addUser(obj, args: IUser, context: IContext) {
             return usersModel.add(args);
         },
 
-        login(obj, args: IUser, context) {
+        login(obj, args: IUser, context: IContext) {
             return usersModel.login(args);
         },
-        logout(obj, {token}, context) {
+        logout(obj, {token}, context: IContext) {
             return usersModel.logout(context.currentUser, token);
         }
     },

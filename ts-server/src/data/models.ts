@@ -1,6 +1,6 @@
 ///<reference path="../../typings.d.ts"/>
 import {sqlDbConnection} from './connections';
-import {IUser} from "../../typings";
+import {IStop, IUser} from "../../typings";
 
 
 const users: [IUser] = [
@@ -66,8 +66,24 @@ class Users {
 }
 
 
+const stops: [IStop] = [
+    {address: "Sofia"},
+    {address: "Varna"},
+    {address: "Bourgas"},
+];
+
+
+class Stops {
+    getDriverStops(loggedUser: IUser, driverId: string): Promise<[IStop]> {
+        return Promise.resolve(stops);
+    }
+}
+
+
 let usersModel = new Users();
+let stopsModel = new Stops();
 
 export  {
-    usersModel
+    usersModel,
+    stopsModel
 }

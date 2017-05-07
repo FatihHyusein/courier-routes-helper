@@ -13,9 +13,9 @@ import {
     MdCardModule,
     MdInputModule,
     MdGridListModule,
-    MdToolbarModule, MdMenuModule, MdIconModule
+    MdToolbarModule, MdMenuModule, MdIconModule, MdSidenavModule
 } from '@angular/material';
-const materialDesignModules = [MdButtonModule, MdCheckboxModule, MdCardModule, MdInputModule, MdGridListModule, MdToolbarModule, MdMenuModule, MdIconModule];
+const materialDesignModules = [MdButtonModule, MdCheckboxModule, MdCardModule, MdInputModule, MdGridListModule, MdToolbarModule, MdMenuModule, MdIconModule, MdSidenavModule];
 
 
 import {AppSessionService} from "./services/app-session.service";

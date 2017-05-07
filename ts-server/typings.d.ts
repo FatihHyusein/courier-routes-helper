@@ -9,6 +9,10 @@ export interface IUser {
     tokens?: [string]
 }
 
+export interface IStop {
+    address: string
+}
+
 export interface IContext {
     currentUser: IUser
 }

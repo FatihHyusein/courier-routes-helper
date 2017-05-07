@@ -1,0 +1,37 @@
+<div>
+    <div class="map-overlay-container">
+        <md-sidenav-container *ngIf="stops && stops.length>0">
+            <md-sidenav #sidenav mode="side" opened="true">
+                <div>
+                    <md-input-container *ngFor="let stop of stops">
+                        <input mdInput type="text" placeholder="Address" [(ngModel)]="stop.address"/>
+                    </md-input-container>
+                </div>
+            </md-sidenav>
+
+            <button md-icon-button (click)="sidenav.toggle()">
+                <md-icon *ngIf="!sidenav.isOpen">keyboard_arrow_right</md-icon>
+                <md-icon *ngIf="sidenav.isOpen">keyboard_arrow_left</md-icon>
+            </button>
+        </md-sidenav-container>
+        <md-card *ngIf="!stops || stops.length==0">
+            <md-card-content>
+                <md-input-container color="accent">
+                    <input mdInput placeholder="Enter your ID" [(ngModel)]="driverId">
+                </md-input-container>
+                <button md-button color="accent" (click)="getDriverStops()">
+                    <md-icon>search</md-icon>
+                </button>
+            </md-card-content>
+        </md-card>
+    </div>
+
+    <sebm-google-map [latitude]="lat" [longitude]="lng">
+        <sebm-google-map-marker [latitude]="lat" [longitude]="lng">
+            <sebm-google-map-info-window [disableAutoPan]="true">
+                Hi, this is the content of the <strong>info window</strong>
+            </sebm-google-map-info-window>
+
+        </sebm-google-map-marker>
+    </sebm-google-map>
+</div>

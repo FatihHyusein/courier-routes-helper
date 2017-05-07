@@ -12,6 +12,7 @@ import {AuthenticationModule} from "./routes/authentication/authentication.modul
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AdminModule} from "./routes/admin/admin.module";
+import {MapModule} from "./routes/map/map.module";
 
 @NgModule({
     imports: [
@@ -20,6 +21,7 @@ import {AdminModule} from "./routes/admin/admin.module";
         SharedModule.forRoot(),
         AuthenticationModule,
         AdminModule,
+        MapModule,
         BrowserAnimationsModule
     ],
     declarations: [
