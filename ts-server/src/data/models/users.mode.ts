@@ -1,16 +1,13 @@
-///<reference path="../../typings.d.ts"/>
-import {sqlDbConnection} from './connections';
-import {IStop, IUser} from "../../typings";
-
+import { IUser } from "../../../typings";
 
 const users: [IUser] = [
-    {id: 1, username: 'Tom', password: 'Coleman'},
-    {id: 2, username: 'Sashko', password: 'Stubailo'},
-    {id: 3, username: '1', password: '1'},
+    { id: 1, username: 'Tom', password: 'Coleman' },
+    { id: 2, username: 'Sashko', password: 'Stubailo' },
+    { id: 3, username: '1', password: '1' },
 ];
 
 
-class Users {
+export default class Users {
     findByToken(token: string): Promise<IUser> {
         return Promise.resolve(users.find((u) => {
             return u.tokens && u.tokens.find(t => {
@@ -28,7 +25,7 @@ class Users {
     }
 
     add(newUser: IUser): Promise<IUser> {
-        newUser = Object.assign({id: users.length}, newUser);
+        newUser = Object.assign({ id: users.length }, newUser);
         users.push(newUser);
 
         return Promise.resolve(newUser);
@@ -63,27 +60,4 @@ class Users {
 
         return Promise.resolve(true);
     }
-}
-
-
-const stops: [IStop] = [
-    {address: "Sofia"},
-    {address: "Varna"},
-    {address: "Bourgas"},
-];
-
-
-class Stops {
-    getDriverStops(loggedUser: IUser, driverId: string): Promise<[IStop]> {
-        return Promise.resolve(stops);
-    }
-}
-
-
-let usersModel = new Users();
-let stopsModel = new Stops();
-
-export  {
-    usersModel,
-    stopsModel
 }

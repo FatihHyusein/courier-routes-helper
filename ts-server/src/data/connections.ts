@@ -1,4 +1,0 @@
-let sqlDbConnection = {};
-export  {
-    sqlDbConnection
-}
