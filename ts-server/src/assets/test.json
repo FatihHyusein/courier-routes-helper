@@ -1,0 +1,15 @@
+{
+    "driverId": "wtf",
+    "key": "2017-05-01-01",
+    "stops": [
+        {
+            "address": "Sofia"
+        },
+        {
+            "address": "Varna"
+        },
+        {
+            "address": "Bourgas"
+        }
+    ]
+}

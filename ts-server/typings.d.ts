@@ -16,3 +16,9 @@ export interface IStop {
 export interface IContext {
     currentUser: IUser
 }
+
+export interface ILogisticApiResponse {
+    driverId: string,
+    key: string,
+    stops: Array<IStop>
+}
