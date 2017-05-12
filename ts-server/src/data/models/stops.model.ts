@@ -5,9 +5,8 @@ import {dataStoreConnections} from "./index";
 export default class Stops {
     getDriverStops(loggedUser: IUser, driverId: string): Promise<[IStop]> {
         return new Promise((resolve, reject) => {
-            dataStoreConnections.logistics.testLogistics.getDriverStopsFromApi({key: 'wtf'}).then((response: ILogisticApiResponse) => {
+            dataStoreConnections.logistics.testLogistics.getDriverStopsFromApi({driverId: driverId}).then((response: ILogisticApiResponse) => {
                 this.getGeocodes(response.stops).then(stopsWithGeoCodes => {
-                    console.log(stopsWithGeoCodes);
                     resolve(stopsWithGeoCodes);
 
                     dataStoreConnections.mongoDbRef.collection('driver-routes').insertOne({
