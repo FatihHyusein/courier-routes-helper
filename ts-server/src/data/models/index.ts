@@ -1,5 +1,8 @@
 import {Express} from "express";
 import {Db, MongoClient} from 'mongodb';
+import * as MySql from 'mysql';
+import {IError} from "mysql";
+
 import {testLogistics} from './logisticsApiConnectors';
 
 const googleMapsClient = require('@google/maps').createClient({
@@ -13,7 +16,7 @@ let usersModel = new Users();
 let stopsModel = new Stops();
 
 let dataStoreConnections = {
-    sql: '',
+    mySqlDbRef: null,
     mongoDbRef: <Db>null,
     logistics: {
         testLogistics
@@ -22,11 +25,26 @@ let dataStoreConnections = {
 };
 
 
-function initDataStoreConnections(app: Express): Promise<boolean> {
-    const url = process.env.MONGO_DB_CONNECTION_URL;
+function initDataStoreConnections(app: Express): Promise<any> {
+    let sqlConnectionPromise = new Promise((resolve, reject) => {
+        dataStoreConnections.mySqlDbRef = MySql.createConnection({
+            host: process.env.SQL_HOST_URL,
+            user: process.env.SQL_USER,
+            database: process.env.SQL_DB_NAME,
+        });
 
-    return new Promise((resolve, reject) => {
-        MongoClient.connect(url, function (err, db) {
+        dataStoreConnections.mySqlDbRef.connect((err: IError, ...args: any[]) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+
+            resolve(true);
+        });
+    });
+
+    let mongoConnectionPromise = new Promise((resolve, reject) => {
+        MongoClient.connect(process.env.MONGO_DB_CONNECTION_URL, (err, db) => {
             if (err) {
                 reject(err);
                 return;
@@ -36,6 +54,8 @@ function initDataStoreConnections(app: Express): Promise<boolean> {
             resolve(true);
         });
     });
+
+    return Promise.all([sqlConnectionPromise, mongoConnectionPromise]);
 }
 
 export  {
